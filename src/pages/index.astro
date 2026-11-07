@@ -1,11 +1,601 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+const photos = [
+  { src: "/images/photo-01.jpg", alt: "Nuestro primer recuerdo", caption: "El comienzo de algo hermoso" },
+  { src: "/images/photo-02.jpg", alt: "Un día juntos", caption: "Esos días que guardo en el corazón" },
+  { src: "/images/photo-03.jpg", alt: "Un momento especial", caption: "Mi sonrisa favorita" },
+  { src: "/images/photo-04.jpg", alt: "Otro recuerdo juntos", caption: "Con vos todo es diferente" },
+  { src: "/images/photo-05.jpg", alt: "Un momento inolvidable", caption: "Pequeños momentos, grandes recuerdos" },
+  { src: "/images/photo-06.jpg", alt: "Nosotros", caption: "Y los que todavía nos esperan" },
+  { src: "/images/photo-07.jpg", alt: "Nosotros", caption: "Y los que todavía nos esperan" },
+  { src: "/images/photo-08.jpg", alt: "Nosotros", caption: "Y los que todavía nos esperan" },
+];
 ---
 
-<Layout>
-	<Welcome />
-</Layout>
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#f8edf5" />
+    <meta name="description" content="Una pequeña historia hecha con amor." />
+    <title>A little piece of us ♡</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    <audio id="music" loop preload="none">
+      <source src="/audio/our-song.mp3" type="audio/mpeg" />
+    </audio>
+
+    <button class="music-button" id="musicButton" aria-label="Activar música">
+      ♫ <span id="musicLabel">PLAY MUSIC</span>
+    </button>
+
+    <main>
+      <!-- PORTADA -->
+      <section class="hero">
+        <div class="hero-glow"></div>
+
+        <span class="eyebrow"> A LITTLE GIFT FOR YOU ♡ </span>
+
+        <h1>
+          To my<br />
+          <em>favorite person.</em>
+        </h1>
+
+        <p class="hero-description">Para vos, Vida. Una pequeña historia de dos personas, muchos recuerdos y un sentimiento enorme.</p>
+
+        <a href="#story" class="start-button">
+          Empezar nuestro viaje
+          <span>↓</span>
+        </a>
+
+        <div class="hero-bottom">A LITTLE JOURNEY THROUGH OUR MEMORIES</div>
+      </section>
+
+      <!-- HISTORIA -->
+      <section id="story" class="story">
+        <div class="section-heading reveal">
+          <span class="eyebrow">CHAPTER ONE</span>
+
+          <h2>
+            Everything is<br />
+            <em>better with you.</em>
+          </h2>
+
+          <p>Vida, estos son algunos de mis recuerdos favoritos. Y todos tienen algo en común: vos.</p>
+        </div>
+
+        {
+          photos.map((photo, index) => (
+            <>
+              <article class={`photo-card photo-${index + 1}`}>
+                <div class="photo-frame">
+                  <img src={photo.src} alt={photo.alt} loading={index === 0 ? "eager" : "lazy"} />
+                </div>
+                <p class="photo-caption">{photo.caption}</p>
+                <span class="photo-number">MEMORY Nº {String(index + 1).padStart(2, "0")}</span>
+              </article>
+
+              {index === 1 && (
+                <div class="quote reveal">
+                  <span>✳</span>
+                  <p>"De todos los lugares del mundo, mi favorito siempre va a ser donde estés vos."</p>
+                  <small>A THOUGHT ABOUT YOU</small>
+                </div>
+              )}
+
+              {index === 3 && (
+                <div class="quote reveal">
+                  <span>♡</span>
+                  <p>"No son solamente las grandes aventuras. Son también todas esas pequeñas cosas con vos."</p>
+                  <small>MY FAVORITE MOMENTS</small>
+                </div>
+              )}
+            </>
+          ))
+        }
+      </section>
+
+      <!-- TRANSICIÓN FINAL -->
+      <section class="ending">
+        <span class="eyebrow">AND THERE'S MORE...</span>
+
+        <h2>
+          Our story<br />
+          <em>isn't finished.</em>
+        </h2>
+
+        <p>Vida, todavía nos quedan tantos momentos por vivir, tantas risas y tantos recuerdos por crear.</p>
+
+        <div class="heart">♡</div>
+
+        <button class="letter-button" id="openLetter">
+          Hay algo que quiero decirte
+          <span>→</span>
+        </button>
+      </section>
+
+      <!-- CARTA -->
+      <section class="letter-section" id="letter">
+        <div class="letter-paper">
+          <span class="eyebrow">A LETTER FOR YOU</span>
+          <h2>Para vos, <em>mi amor.</em></h2>
+
+          <div class="letter-content">
+            <p>Mi amor:</p>
+
+            <p>Quería regalarte algo diferente, algo que pudieras guardar y volver a mirar cuando quisieras recordar lo mucho que significás para mí.</p>
+
+            <p>Cada una de estas fotos guarda un pedacito de nuestra historia. Momentos que quizás parecen pequeños, pero que para mí significan muchísimo.</p>
+
+            <p>Gracias por tu compañía, por tus sonrisas, por cada abrazo y por hacer que tantos días sean especiales simplemente por compartirlos con vos.</p>
+
+            <p>No sé cuántos recuerdos nos esperan, pero sí sé que quiero seguir construyéndolos a tu lado.</p>
+
+            <p class="signature">
+              Te quiero muchísimo.<br />
+              <em>Siempre nosotros. ♡</em>
+            </p>
+          </div>
+
+          <div class="letter-decoration">♡</div>
+        </div>
+
+        <footer>MADE WITH ALL MY LOVE · JUST FOR YOU</footer>
+      </section>
+    </main>
+
+    <script>
+      import gsap from "gsap";
+      import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+      gsap.registerPlugin(ScrollTrigger);
+
+      // Música: requiere interacción de la visitante
+      const music = document.querySelector("#music") as HTMLAudioElement | null;
+      const musicButton = document.querySelector("#musicButton") as HTMLButtonElement | null;
+      const musicLabel = document.querySelector("#musicLabel") as HTMLElement | null;
+
+      musicButton?.addEventListener("click", async () => {
+        if (!music || !musicButton || !musicLabel) return;
+
+        if (music.paused) {
+          try {
+            await music.play();
+            musicLabel.textContent = "MUSIC ON ♡";
+            musicButton.classList.add("playing");
+            musicButton.setAttribute("aria-label", "Pausar música");
+          } catch {
+            musicLabel.textContent = "TRY AGAIN";
+          }
+        } else {
+          music.pause();
+          musicLabel.textContent = "PLAY MUSIC";
+          musicButton.classList.remove("playing");
+          musicButton.setAttribute("aria-label", "Activar música");
+        }
+      });
+
+      // Animaciones de entrada
+      const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+      if (!reduceMotion) {
+        gsap.from(".hero .eyebrow, .hero h1, .hero-description, .start-button", {
+          opacity: 0,
+          y: 30,
+          duration: 1.2,
+          stagger: 0.2,
+          ease: "power3.out",
+        });
+
+        // Fotografías
+        gsap.utils.toArray<HTMLElement>(".photo-card").forEach((card) => {
+          gsap.from(card, {
+            opacity: 0,
+            y: 70,
+            duration: 1.1,
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger: card,
+              start: "top 85%",
+              toggleActions: "play none none reverse",
+            },
+          });
+
+          const img = card.querySelector("img");
+          if (!img) return;
+
+          gsap.from(img, {
+            scale: 1.12,
+            duration: 1.5,
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger: card,
+              start: "top 85%",
+              toggleActions: "play none none reverse",
+            },
+          });
+        });
+
+        // Frases y títulos
+        gsap.utils.toArray<HTMLElement>(".reveal").forEach((element) => {
+          gsap.from(element, {
+            opacity: 0,
+            y: 45,
+            duration: 1.2,
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger: element,
+              start: "top 80%",
+            },
+          });
+        });
+
+        // Carta
+        gsap.from(".letter-paper", {
+          opacity: 0,
+          y: 60,
+          duration: 1.2,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: ".letter-section",
+            start: "top 75%",
+          },
+        });
+      }
+
+      // Abrir la carta
+      document.querySelector("#openLetter")?.addEventListener("click", () => {
+        document.querySelector("#letter")?.scrollIntoView({
+          behavior: reduceMotion ? "instant" : "smooth",
+        });
+      });
+    </script>
+  </body>
+</html>
+
+<style>
+  :root {
+    --background: #f8edf5;
+    --pink: #e8c8df;
+    --lavender: #dcd2ef;
+    --purple: #876a91;
+    --dark: #5c4862;
+    --muted: #a28ba4;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    margin: 0;
+    background: var(--background);
+    color: var(--dark);
+    font-family: "DM Sans", sans-serif;
+    overflow-x: hidden;
+  }
+
+  h1,
+  h2,
+  p {
+    margin-top: 0;
+  }
+
+  h1,
+  h2 {
+    font-family: "Playfair Display", serif;
+    font-weight: 400;
+  }
+
+  em {
+    color: var(--purple);
+    font-weight: 400;
+  }
+
+  .hero {
+    min-height: 100svh;
+    padding: 100px 24px 70px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: relative;
+    isolation: isolate;
+  }
+
+  .hero-glow {
+    position: absolute;
+    z-index: -1;
+    width: 340px;
+    height: 340px;
+    border-radius: 50%;
+    background: #e9d6ed;
+    filter: blur(90px);
+    opacity: 0.8;
+  }
+
+  .eyebrow {
+    color: var(--muted);
+    font-size: 10px;
+    letter-spacing: 3px;
+    font-weight: 600;
+  }
+
+  .hero h1 {
+    font-size: clamp(58px, 12vw, 100px);
+    line-height: 1.08;
+    margin: 30px 0;
+    color: #6c5473;
+  }
+
+  .hero-description {
+    max-width: 320px;
+    line-height: 1.9;
+    color: #987f9a;
+    font-size: 14px;
+  }
+
+  .start-button,
+  .letter-button {
+    margin-top: 35px;
+    text-decoration: none;
+    border: 1px solid #cdb5ce;
+    color: var(--purple);
+    border-radius: 50px;
+    padding: 16px 24px;
+    background: #ffffff55;
+    font-family: inherit;
+    font-size: 12px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+
+  .start-button span,
+  .letter-button span {
+    margin-left: 12px;
+  }
+
+  .start-button:hover,
+  .letter-button:hover {
+    background: white;
+    transform: translateY(-3px);
+  }
+
+  .hero-bottom {
+    position: absolute;
+    bottom: 30px;
+    font-size: 9px;
+    letter-spacing: 3px;
+    color: #b39ab2;
+  }
+
+  .music-button {
+    position: fixed;
+    z-index: 20;
+    right: 18px;
+    top: 18px;
+    border: 1px solid #d8bfd7;
+    background: #fffaf0e8;
+    color: var(--purple);
+    border-radius: 40px;
+    padding: 11px 15px;
+    font-size: 10px;
+    letter-spacing: 1px;
+    cursor: pointer;
+    backdrop-filter: blur(10px);
+  }
+
+  .music-button.playing {
+    background: #e9d8eb;
+  }
+
+  .story {
+    max-width: 760px;
+    padding: 100px 24px;
+    margin: auto;
+  }
+
+  .section-heading {
+    text-align: center;
+    margin-bottom: 100px;
+  }
+
+  .section-heading h2,
+  .ending h2 {
+    font-size: clamp(42px, 8vw, 65px);
+    line-height: 1.15;
+    margin: 25px 0;
+  }
+
+  .section-heading p {
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.8;
+  }
+
+  .photo-card {
+    max-width: 540px;
+    margin: 0 auto 125px;
+    text-align: center;
+  }
+
+  .photo-frame {
+    padding: 10px;
+    background: #fffaf9;
+    border-radius: 5px;
+    box-shadow: 0 15px 50px #a98ba51c;
+    transform: rotate(-1deg);
+  }
+
+  .photo-2 .photo-frame,
+  .photo-5 .photo-frame {
+    transform: rotate(1.2deg);
+  }
+
+  .photo-frame img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    border-radius: 2px;
+  }
+
+  .photo-caption {
+    font-family: "Playfair Display", serif;
+    font-style: italic;
+    font-size: 19px;
+    margin: 22px 0 10px;
+    color: #806b87;
+  }
+
+  .photo-number {
+    color: #b69db4;
+    letter-spacing: 3px;
+    font-size: 9px;
+  }
+
+  .quote {
+    min-height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 35px 15px;
+    margin: 30px 0 100px;
+  }
+
+  .quote > span {
+    color: #b68db1;
+    font-size: 28px;
+  }
+
+  .quote p {
+    font-family: "Playfair Display", serif;
+    font-style: italic;
+    font-size: clamp(26px, 5vw, 38px);
+    max-width: 550px;
+    line-height: 1.5;
+    margin: 25px 0;
+  }
+
+  .quote small {
+    letter-spacing: 3px;
+    font-size: 9px;
+    color: var(--muted);
+  }
+
+  .ending {
+    min-height: 90svh;
+    background: linear-gradient(160deg, #ead9ef, #f8dfe9, #f7eaf0);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 60px 25px;
+  }
+
+  .ending h2 {
+    color: #715779;
+  }
+
+  .ending p {
+    max-width: 300px;
+    font-size: 13px;
+    color: #947b98;
+    line-height: 1.8;
+  }
+
+  .heart {
+    font-size: 42px;
+    color: #c78ba9;
+    margin: 25px 0 0;
+  }
+
+  .letter-section {
+    min-height: 100svh;
+    padding: 100px 20px 45px;
+    background: #f8edf5;
+  }
+
+  .letter-paper {
+    max-width: 570px;
+    margin: auto;
+    padding: clamp(30px, 7vw, 65px);
+    background: #fffaf7;
+    box-shadow: 0 20px 70px #a88ba51c;
+    position: relative;
+  }
+
+  .letter-paper h2 {
+    font-size: clamp(35px, 7vw, 48px);
+    margin: 30px 0;
+  }
+
+  .letter-content {
+    color: #806e7c;
+    font-family: "Playfair Display", serif;
+    font-size: 16px;
+    line-height: 2;
+  }
+
+  .letter-content p {
+    margin-bottom: 22px;
+  }
+
+  .signature {
+    margin-top: 45px;
+    color: #80618a;
+  }
+
+  .letter-decoration {
+    color: #d6b0c9;
+    font-size: 28px;
+    text-align: right;
+  }
+
+  footer {
+    padding: 55px 10px 20px;
+    text-align: center;
+    font-size: 9px;
+    letter-spacing: 3px;
+    color: #ac92aa;
+  }
+
+  @media (min-width: 768px) {
+    .photo-card {
+      margin-bottom: 160px;
+    }
+
+    .photo-frame img {
+      aspect-ratio: 5 / 4;
+    }
+
+    .story {
+      padding-top: 150px;
+      padding-bottom: 150px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      scroll-behavior: auto !important;
+    }
+  }
+</style>
